@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("APP_DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String
+  password  String
+  createdAt DateTime  @default(now()) @map("created_at")
+  Company   Company[]
+
+  @@map("users")
+}
+
+model Company {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @map("user_id")
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  Unity     Unity[]
+
+  @@map("companies")
+}
+
+model Unity {
+  id        String   @id @default(uuid())
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String   @map("company_id")
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  Asset     Asset[]
+
+  @@map("units")
+}
+
+model Asset {
+  id          String   @id @default(uuid())
+  unitId      String   @map("unit_id")
+  unit        Unity    @relation(fields: [unitId], references: [id])
+  name        String
+  description String
+  model       String
+  owner       String
+  status      String
+  healthLevel String   @map("health_level")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("assets")
+}
