@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateAssetUseCase } from "./CreateAssetUseCase";
+import { CreateAssetUseCase } from "../../../useCases/createAsset/CreateAssetUseCase";
 
 export class CreateAssetController {
   async handle(request: Request, response: Response) {

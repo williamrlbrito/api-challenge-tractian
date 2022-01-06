@@ -1,21 +1,16 @@
 import { Router } from "express";
-import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
-import { AuthenticateController } from "./modules/account/useCases/authenticate/AuthenticateController";
-import { CreateAssetController } from "./modules/assets/useCases/createAsset/CreateAssetController";
+import { accountsRouter } from "./modules/accounts/infra/http/routes/accounts.routes";
+import { assetsRouter } from "./modules/assets/infra/http/routes/assets.routes";
 import { companiesRouter } from "./modules/companies/infra/http/routes/companies.routes";
-import { CreateUserController } from "./modules/users/useCases/createUser/CreateUserController";
+import { unitsRouter } from "./modules/units/infra/http/routes/units.routes";
+import { usersRouter } from "./modules/users/infra/http/routes/users.routes";
 
 const routes = Router();
 
-const createUserController = new CreateUserController();
-const authenticateController = new AuthenticateController();
-const createAssetController = new CreateAssetController();
-
-routes.post("/users", createUserController.handle);
-routes.post("/users/authenticate", authenticateController.handle);
-
+routes.use("/users", usersRouter);
+routes.use("/accounts", accountsRouter);
 routes.use("/companies", companiesRouter);
-
-routes.post("/assets", ensureAuthenticated, createAssetController.handle);
+routes.use("/units", unitsRouter);
+routes.use("/assets", assetsRouter);
 
 export { routes };

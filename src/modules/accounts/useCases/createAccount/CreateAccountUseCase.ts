@@ -1,16 +1,14 @@
 import { hash } from "bcrypt";
 import { prisma } from "../../../../database/prismaClient";
 
-interface ICreateUser {
-  userId: string;
-  companyId: string;
+interface ICreateAccount {
   name: string;
   email: string;
   password: string;
 }
 
-export class CreateUserUseCase {
-  async execute({ userId, companyId, name, email, password }: ICreateUser) {
+export class CreateAccountUseCase {
+  async execute({ name, email, password }: ICreateAccount) {
     const userExists = await prisma.user.findFirst({
       where: {
         email: {
@@ -24,21 +22,6 @@ export class CreateUserUseCase {
       throw new Error("User already exists");
     }
 
-    const companyExists = await prisma.company.findFirst({
-      where: {
-        id: companyId,
-        users: {
-          some: {
-            id: userId,
-          },
-        },
-      },
-    });
-
-    if (!companyExists) {
-      throw new Error("Company does not exist or you are not authorized");
-    }
-
     const hashedPassword = await hash(password, 10);
 
     const user = await prisma.user.create({
@@ -46,11 +29,6 @@ export class CreateUserUseCase {
         name,
         email,
         password: hashedPassword,
-        companies: {
-          connect: {
-            id: companyId,
-          },
-        },
       },
     });
 

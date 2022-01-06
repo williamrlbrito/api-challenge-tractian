@@ -1,7 +1,12 @@
 import { prisma } from "../../../../database/prismaClient";
 
+interface IListUnity {
+  userId: string;
+  companyId?: string;
+}
+
 export class ListUnityUseCase {
-  async execute(userId: string, companyId: string) {
+  async execute({ userId, companyId }: IListUnity) {
     return prisma.unity.findMany({
       where: {
         companyId,
