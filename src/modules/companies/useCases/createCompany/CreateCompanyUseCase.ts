@@ -9,10 +9,14 @@ export class CreateCompanyUseCase {
   async execute({ userId, name }: ICreateCompany) {
     const companyExists = await prisma.company.findFirst({
       where: {
-        userId,
         name: {
           equals: name,
           mode: "insensitive",
+        },
+        users: {
+          some: {
+            id: userId,
+          },
         },
       },
     });
@@ -23,8 +27,12 @@ export class CreateCompanyUseCase {
 
     const company = await prisma.company.create({
       data: {
-        userId,
         name,
+        users: {
+          connect: {
+            id: userId,
+          },
+        },
       },
     });
 
