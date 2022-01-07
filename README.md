@@ -43,3 +43,7 @@ Our users, Emerson and Roberta, are maintenance managers at Industria Freios Sup
 
 - Typescript;
 - Design Standard (Clean Code/Clean Architecture).
+
+## Resolution
+
+- <a href="https://api-challenge-tractian.herokuapp.com/api-docs/">🔗 Test here</a>
