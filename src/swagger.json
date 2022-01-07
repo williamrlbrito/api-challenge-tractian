@@ -10,6 +10,15 @@
       "email": "williamrldb@gmail.com"
     }
   },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
   "paths": {
     "/accounts": {
       "post": {
@@ -211,6 +220,50 @@
         }
       }
     },
+    "/accounts/profile": {
+      "get": {
+        "tags": ["accounts"],
+        "summary": "Get account profile",
+        "description": "Get account profile",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "0bc918bf-f5ad-4fbc-b60d-b4a4a15fb9a8",
+                    "name": "John Three",
+                    "email": "johnthree@gmail.com",
+                    "createdAt": "2022-01-07T22:06:26.536Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/companies": {
       "post": {
         "tags": ["companies"],
@@ -301,7 +354,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "get": {
         "tags": ["companies"],
@@ -358,7 +416,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/units": {
@@ -455,7 +518,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "get": {
         "tags": ["units"],
@@ -522,7 +590,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/assets": {
@@ -668,7 +741,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "get": {
         "tags": ["assets"],
@@ -760,7 +838,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/users": {
@@ -868,7 +951,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "get": {
         "tags": ["users"],
@@ -929,7 +1017,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   }
