@@ -262,6 +262,74 @@
             "bearerAuth": []
           }
         ]
+      },
+      "put": {
+        "tags": ["accounts"],
+        "summary": "Update account profile",
+        "description": "Update account profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "oldPassword": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "John Doe",
+                  "oldPassword": "123456",
+                  "password": "1234"
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "0bc918bf-f5ad-4fbc-b60d-b4a4a15fb9a8",
+                    "name": "John Three",
+                    "email": "johndoe@gmail.com",
+                    "createdAt": "2022-01-06T19:00:55.647Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/companies": {
