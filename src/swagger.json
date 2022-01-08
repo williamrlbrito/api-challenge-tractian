@@ -286,7 +286,7 @@
                 "example": {
                   "name": "John Doe",
                   "oldPassword": "123456",
-                  "password": "1234"
+                  "password": "123456"
                 },
                 "required": ["name"]
               }
@@ -323,6 +323,39 @@
                 }
               }
             }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/accounts/avatar": {
+      "patch": {
+        "tags": ["accounts"],
+        "summary": "Update account avatar",
+        "description": "Update account avatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["avatar"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
           }
         },
         "security": [

@@ -1,2 +1,11 @@
+.vscode
+dist
 node_modules
+yarn.lock
+temp/*
+!temp/.gitkeep
+!temp/uploads
+temp/uploads/*
+!temp/uploads/.gitkeep
+coverage
 .env

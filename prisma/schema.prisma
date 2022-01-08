@@ -12,7 +12,9 @@ model User {
   name      String
   email     String
   password  String
+  avatar    String?
   createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
   companies Company[] @relation("_companyusers")
 
   @@map("users")
@@ -22,6 +24,7 @@ model Company {
   id        String   @id @default(uuid())
   name      String
   createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
   users     User[]   @relation("_companyusers")
   units     Unity[]
 
@@ -34,6 +37,7 @@ model Unity {
   companyId String   @map("company_id")
   name      String
   createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
   assets    Asset[]
 
   @@map("units")
@@ -49,8 +53,9 @@ model Asset {
   owner       String
   status      String
   healthLevel Int      @map("health_level")
-  photoUrl    String?  @map("photo_url")
+  photo       String?
   createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("assets")
 }

@@ -1,8 +1,9 @@
+import { buildUrl } from "../../../../config/upload";
 import { prisma } from "../../../../database/prismaClient";
 
 export class ShowProfileUseCase {
   async execute(userId: string) {
-    return prisma.user.findUnique({
+    const profile = await prisma.user.findUnique({
       where: {
         id: userId,
       },
@@ -10,8 +11,19 @@ export class ShowProfileUseCase {
         id: true,
         name: true,
         email: true,
+        avatar: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
+
+    if (!profile) {
+      throw new Error("Profile not found");
+    }
+
+    return {
+      ...profile,
+      avatarUrl: buildUrl(profile.avatar),
+    };
   }
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ensureAuthenticated } from "../../../../../middlewares/ensureAuthenticated";
+import { ensureAuthenticated } from "../../../../users/infra/http/middlewares/ensureAuthenticated";
 import { CreateCompanyController } from "../controllers/CreateCompanyController";
 import { ListCompanyController } from "../controllers/ListCompanyController";
 

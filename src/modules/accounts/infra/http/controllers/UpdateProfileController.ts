@@ -8,13 +8,13 @@ export class UpdateProfileController {
 
     const updateProfileUseCase = new UpdateProfileUseCase();
 
-    const account = await updateProfileUseCase.execute({
+    await updateProfileUseCase.execute({
       id: userId,
       name,
       oldPassword,
       password,
     });
 
-    return response.json(account);
+    return response.status(204).send();
   }
 }

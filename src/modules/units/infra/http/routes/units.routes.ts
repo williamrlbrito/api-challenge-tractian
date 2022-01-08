@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ensureAuthenticated } from "../../../../../middlewares/ensureAuthenticated";
+import { ensureAuthenticated } from "../../../../users/infra/http/middlewares/ensureAuthenticated";
 import { CreateUnityController } from "../controllers/CreateUnityController";
 import { ListUnityController } from "../controllers/ListUnityController";
 

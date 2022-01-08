@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ensureAuthenticated } from "../../../../../middlewares/ensureAuthenticated";
+import { ensureAuthenticated } from "../../../../users/infra/http/middlewares/ensureAuthenticated";
 import { CreateAssetController } from "../controllers/CreateAssetController";
 import { ListAssetController } from "../controllers/ListAssetController";
 

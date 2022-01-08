@@ -39,11 +39,12 @@ export class UpdateProfileUseCase {
       accountExists.password = await hash(password, 10);
     }
 
-    const updatedAccount = await prisma.user.update({
+    await prisma.user.update({
       where: { id },
-      data: accountExists,
+      data: {
+        name,
+        password: accountExists.password,
+      },
     });
-
-    return Object.assign({}, updatedAccount, { password: undefined });
   }
 }

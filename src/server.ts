@@ -1,13 +1,24 @@
+import "reflect-metadata";
+import "dotenv/config";
+
 import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
+import { upload } from "./config/upload";
 import { routes } from "./routes";
 
 import swaggerFile from "./swagger.json";
 
+import "./shared/container";
+
 const app = express();
 
+app.use(cors());
+
 app.use(express.json());
+
+app.use("/files", express.static(upload.uploadsFolder));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 

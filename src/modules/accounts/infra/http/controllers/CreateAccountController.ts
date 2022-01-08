@@ -7,12 +7,12 @@ export class CreateAccountController {
 
     const createAccountUseCase = new CreateAccountUseCase();
 
-    const result = await createAccountUseCase.execute({
+    await createAccountUseCase.execute({
       name,
       email,
       password,
     });
 
-    return response.json(result);
+    return response.status(201).send();
   }
 }
