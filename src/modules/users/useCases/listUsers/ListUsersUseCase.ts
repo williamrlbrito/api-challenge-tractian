@@ -1,8 +1,9 @@
+import { buildUrl } from "../../../../config/upload";
 import { prisma } from "../../../../database/prismaClient";
 
-export class ListUserUseCase {
+export class ListUsersUseCase {
   async execute(userId: string) {
-    return prisma.user.findMany({
+    const users = await prisma.user.findMany({
       where: {
         id: {
           not: userId,
@@ -21,8 +22,17 @@ export class ListUserUseCase {
         id: true,
         name: true,
         email: true,
+        avatar: true,
         createdAt: true,
+        updatedAt: true,
       },
+    });
+
+    return users.map((user) => {
+      return {
+        ...user,
+        avatarUrl: buildUrl(user.avatar),
+      };
     });
   }
 }

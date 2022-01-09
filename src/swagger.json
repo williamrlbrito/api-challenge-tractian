@@ -40,7 +40,7 @@
                   "password": {
                     "type": "string"
                   },
-                  "password_confirmation": {
+                  "passwordConfirmation": {
                     "type": "string"
                   }
                 },
@@ -48,48 +48,21 @@
                   "name": "John Doe",
                   "email": "johndoe@gmail.com",
                   "password": "123456",
-                  "password_confirmation": "123456"
+                  "passwordConfirmation": "123456"
                 },
                 "required": [
                   "name",
                   "email",
                   "password",
-                  "password_confirmation"
+                  "passwordConfirmation"
                 ]
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "example": {
-                    "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
-                    "name": "John Doe",
-                    "email": "johndoe@gmail.com",
-                    "createdAt": "2022-01-06T23:37:27.518Z"
-                  }
-                }
-              }
-            }
+          "201": {
+            "description": "Account created successfully"
           },
           "400": {
             "description": "Bad Request",
@@ -242,15 +215,67 @@
                     "email": {
                       "type": "string"
                     },
+                    "avatar": {
+                      "type": "string"
+                    },
                     "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "avatarUrl": {
                       "type": "string"
                     }
                   },
                   "example": {
-                    "id": "0bc918bf-f5ad-4fbc-b60d-b4a4a15fb9a8",
-                    "name": "John Three",
-                    "email": "johnthree@gmail.com",
-                    "createdAt": "2022-01-07T22:06:26.536Z"
+                    "id": "1eee6b1c-25dd-475b-bce1-c1d2db3d6c77",
+                    "name": "John Doe",
+                    "email": "johndoe@gmail.com",
+                    "avatar": "9f18c4b8-3c57-4a52-98dc-345992a3e992-file.jpeg",
+                    "createdAt": "2022-01-08T19:04:47.079Z",
+                    "updatedAt": "2022-01-08T19:05:55.268Z",
+                    "avatarUrl": "https://api-challenge-tractian.herokuapp.com/files/9f18c4b8-3c57-4a52-98dc-345992a3e992-file.jpeg"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
                   }
                 }
               }
@@ -294,31 +319,62 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Success",
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "createdAt": {
+                    "error": {
                       "type": "string"
                     }
                   },
                   "example": {
-                    "id": "0bc918bf-f5ad-4fbc-b60d-b4a4a15fb9a8",
-                    "name": "John Three",
-                    "email": "johndoe@gmail.com",
-                    "createdAt": "2022-01-06T19:00:55.647Z"
+                    "error": "Account not found | Old password is incorrect"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
                   }
                 }
               }
@@ -356,6 +412,46 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -407,9 +503,10 @@
                     }
                   },
                   "example": {
-                    "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
+                    "id": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
                     "name": "Company One",
-                    "createdAt": "2022-01-06T23:37:27.518Z"
+                    "createdAt": "2022-01-09T01:10:55.150Z",
+                    "updatedAt": "2022-01-09T01:10:55.151Z"
                   }
                 }
               }
@@ -428,6 +525,24 @@
                   },
                   "example": {
                     "error": "Company already exists"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
                   }
                 }
               }
@@ -482,15 +597,604 @@
                     },
                     "createdAt": {
                       "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
                     }
                   },
                   "example": [
                     {
-                      "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
+                      "id": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
                       "name": "Company One",
-                      "createdAt": "2022-01-06T23:37:27.518Z"
+                      "createdAt": "2022-01-09T01:10:55.150Z",
+                      "updatedAt": "2022-01-09T01:11:10.064Z"
                     }
                   ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/companies/{id}": {
+      "get": {
+        "tags": ["companies"],
+        "summary": "Get a company",
+        "description": "Get a company by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Company ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
+                    "name": "Company One",
+                    "createdAt": "2022-01-09T01:10:55.150Z",
+                    "updatedAt": "2022-01-09T01:10:55.151Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Company not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["companies"],
+        "summary": "Update a company",
+        "description": "Update a company by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Company ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Company One"
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
+                    "name": "Company One",
+                    "createdAt": "2022-01-09T01:10:55.150Z",
+                    "updatedAt": "2022-01-09T01:10:55.151Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Company not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/companies/{id}/units": {
+      "get": {
+        "tags": ["companies"],
+        "summary": "Get units of a company",
+        "description": "Get units of a company by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Company ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "companyId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                      "companyId": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
+                      "name": "Unity One",
+                      "createdAt": "2022-01-09T01:11:40.549Z",
+                      "updatedAt": "2022-01-09T01:11:55.400Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/companies/{id}/assets": {
+      "get": {
+        "tags": ["companies"],
+        "summary": "Get assets of a company",
+        "description": "Get assets of a company by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Company ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "unityId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "healthLevel": {
+                      "type": "number"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
+                      "type": "string"
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "76049ee6-53fb-42c3-98bc-5c7a73303285",
+                      "unityId": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                      "name": "Asset One",
+                      "description": "Asset description",
+                      "model": "Asset model",
+                      "owner": "Asset owner",
+                      "status": "Running",
+                      "healthLevel": 60,
+                      "image": "7c3735ef-05ed-4f05-ae6f-dfb4ce4fff6c-file.png",
+                      "createdAt": "2022-01-09T01:12:27.274Z",
+                      "updatedAt": "2022-01-09T01:13:14.640Z",
+                      "imageUrl": "https://api-challenge-tractian.herokuapp.com/files/7c3735ef-05ed-4f05-ae6f-dfb4ce4fff6c-file.png"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/companies/{id}/assets/summary": {
+      "get": {
+        "tags": ["companies"],
+        "summary": "Get assets summary of a company",
+        "description": "Get assets summary of a company by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Company ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "healthLevel": {
+                      "type": "number"
+                    },
+                    "running": {
+                      "type": "number"
+                    },
+                    "alerting": {
+                      "type": "number"
+                    },
+                    "atopped": {
+                      "type": "number"
+                    }
+                  },
+                  "example": {
+                    "healthLevel": 60,
+                    "running": 1,
+                    "alerting": 0,
+                    "atopped": 0
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
                 }
               }
             }
@@ -568,12 +1272,16 @@
                     },
                     "createdAt": {
                       "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
                     }
                   },
                   "example": {
-                    "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
-                    "name": "Unit One",
-                    "createdAt": "2022-01-06T23:37:27.518Z"
+                    "id": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                    "name": "Unity One",
+                    "createdAt": "2022-01-09T01:11:40.549Z",
+                    "updatedAt": "2022-01-09T01:11:55.400Z"
                   }
                 }
               }
@@ -592,6 +1300,24 @@
                   },
                   "example": {
                     "error": "Company does not exist | Unit already exists"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
                   }
                 }
               }
@@ -630,11 +1356,351 @@
         "tags": ["units"],
         "summary": "Get all units",
         "description": "Get all units associated with the authenticated account",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "companyId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                      "companyId": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
+                      "name": "Unity One",
+                      "createdAt": "2022-01-09T01:11:40.549Z",
+                      "updatedAt": "2022-01-09T01:11:55.400Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/units/{id}": {
+      "get": {
+        "tags": ["units"],
+        "summary": "Get unit by ID",
+        "description": "Get unit by ID",
         "parameters": [
           {
-            "name": "companyId",
-            "in": "query",
-            "description": "Company ID",
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "companyId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                    "companyId": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
+                    "name": "Unity One",
+                    "createdAt": "2022-01-09T01:11:40.549Z",
+                    "updatedAt": "2022-01-09T01:11:55.400Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Unity not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["units"],
+        "summary": "Update unit by ID",
+        "description": "Update unit by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Unity Two"
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "companyId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                    "companyId": "c8d02d2b-12b5-4a5f-be91-9582d76d7b31",
+                    "name": "Unity Two",
+                    "createdAt": "2022-01-09T01:11:40.549Z",
+                    "updatedAt": "2022-01-09T01:11:55.400Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Unity not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/units/{id}/assets": {
+      "get": {
+        "tags": ["units"],
+        "summary": "Get assets of a unity",
+        "description": "Get assets of a unity by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unity ID",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -651,20 +1717,169 @@
                     "id": {
                       "type": "string"
                     },
+                    "unityId": {
+                      "type": "string"
+                    },
                     "name": {
                       "type": "string"
                     },
+                    "description": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "healthLevel": {
+                      "type": "number"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
                     "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
                       "type": "string"
                     }
                   },
                   "example": [
                     {
-                      "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
-                      "name": "Unit One",
-                      "createdAt": "2022-01-06T23:37:27.518Z"
+                      "id": "76049ee6-53fb-42c3-98bc-5c7a73303285",
+                      "unityId": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                      "name": "Asset One",
+                      "description": "Asset description",
+                      "model": "Asset model",
+                      "owner": "Asset owner",
+                      "status": "Running",
+                      "healthLevel": 60,
+                      "image": "7c3735ef-05ed-4f05-ae6f-dfb4ce4fff6c-file.png",
+                      "createdAt": "2022-01-09T01:12:27.274Z",
+                      "updatedAt": "2022-01-09T01:13:14.640Z",
+                      "imageUrl": "https://api-challenge-tractian.herokuapp.com/files/7c3735ef-05ed-4f05-ae6f-dfb4ce4fff6c-file.png"
                     }
                   ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/units/{id}/assets/summary": {
+      "get": {
+        "tags": ["units"],
+        "summary": "Get assets summary of a unity",
+        "description": "Get assets summary of a unity by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unity ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "healthLevel": {
+                      "type": "number"
+                    },
+                    "running": {
+                      "type": "number"
+                    },
+                    "alerting": {
+                      "type": "number"
+                    },
+                    "atopped": {
+                      "type": "number"
+                    }
+                  },
+                  "example": {
+                    "healthLevel": 60,
+                    "running": 1,
+                    "alerting": 0,
+                    "atopped": 0
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
                 }
               }
             }
@@ -703,7 +1918,7 @@
       "post": {
         "tags": ["assets"],
         "summary": "Create a new asset",
-        "description": "Create a new asset for company",
+        "description": "Create a new asset for a unity",
         "requestBody": {
           "content": {
             "application/json": {
@@ -765,6 +1980,9 @@
                     "id": {
                       "type": "string"
                     },
+                    "unityId": {
+                      "type": "string"
+                    },
                     "name": {
                       "type": "string"
                     },
@@ -783,20 +2001,32 @@
                     "healthLevel": {
                       "type": "number"
                     },
+                    "image": {
+                      "type": "string"
+                    },
                     "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
                       "type": "string"
                     }
                   },
                   "example": {
-                    "id": "660eb8c5-be8e-40f7-b472-54faf8bf8ba8",
+                    "id": "76049ee6-53fb-42c3-98bc-5c7a73303285",
+                    "unityId": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
                     "name": "Asset One",
                     "description": "Asset description",
                     "model": "Asset model",
                     "owner": "Asset owner",
                     "status": "Running",
                     "healthLevel": 70,
-                    "photoUrl": null,
-                    "createdAt": "2022-01-07T19:32:06.089Z"
+                    "image": null,
+                    "createdAt": "2022-01-09T01:12:27.274Z",
+                    "updatedAt": "2022-01-09T01:12:27.274Z",
+                    "imageUrl": null
                   }
                 }
               }
@@ -815,6 +2045,24 @@
                   },
                   "example": {
                     "error": "Unity or Company does not exist or you are not authorized | Asset already exists"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
                   }
                 }
               }
@@ -852,17 +2100,7 @@
       "get": {
         "tags": ["assets"],
         "summary": "Get all assets",
-        "description": "Get all assets associated with units associated with the authenticated account",
-        "parameters": [
-          {
-            "name": "unityId",
-            "in": "query",
-            "description": "Unity Id",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "description": "Get all assets associated with the authenticated account",
         "responses": {
           "200": {
             "description": "Success",
@@ -895,24 +2133,486 @@
                     "healthLevel": {
                       "type": "number"
                     },
+                    "image": {
+                      "type": "string"
+                    },
                     "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
                       "type": "string"
                     }
                   },
                   "example": [
                     {
-                      "id": "660eb8c5-be8e-40f7-b472-54faf8bf8ba8",
-                      "unityId": "daf480e9-ef0b-4a2c-bfce-849922acc291",
+                      "id": "76049ee6-53fb-42c3-98bc-5c7a73303285",
+                      "unityId": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
                       "name": "Asset One",
                       "description": "Asset description",
                       "model": "Asset model",
                       "owner": "Asset owner",
                       "status": "Running",
-                      "healthLevel": 70,
-                      "photoUrl": null,
-                      "createdAt": "2022-01-07T19:32:06.089Z"
+                      "healthLevel": 60,
+                      "image": "7c3735ef-05ed-4f05-ae6f-dfb4ce4fff6c-file.png",
+                      "createdAt": "2022-01-09T01:12:27.274Z",
+                      "updatedAt": "2022-01-09T01:13:14.640Z",
+                      "imageUrl": "https://api-challenge-tractian.herokuapp.com/files/7c3735ef-05ed-4f05-ae6f-dfb4ce4fff6c-file.png"
                     }
                   ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/assets/{id}": {
+      "get": {
+        "tags": ["assets"],
+        "summary": "Get asset by ID",
+        "description": "Get asset by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Asset ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "unityId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "healthLevel": {
+                      "type": "number"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "76049ee6-53fb-42c3-98bc-5c7a73303285",
+                    "unityId": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                    "name": "Asset One",
+                    "description": "Asset description",
+                    "model": "Asset model",
+                    "owner": "Asset owner",
+                    "status": "Running",
+                    "healthLevel": 70,
+                    "image": null,
+                    "createdAt": "2022-01-09T01:12:27.274Z",
+                    "updatedAt": "2022-01-09T01:12:27.274Z",
+                    "imageUrl": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Unity not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["assets"],
+        "summary": "Update asset by ID",
+        "description": "Update asset by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Asset ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "owner": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "number"
+                  },
+                  "healthLevel": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "name": "Asset One",
+                  "description": "Asset description",
+                  "model": "Asset model",
+                  "owner": "Asset owner",
+                  "status": "Running",
+                  "healthLevel": 70
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "model",
+                  "owner",
+                  "status",
+                  "healthLevel"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "unityId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "healthLevel": {
+                      "type": "number"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "76049ee6-53fb-42c3-98bc-5c7a73303285",
+                    "unityId": "81d16b1f-18b8-47ad-9d47-9c10cb4932e4",
+                    "name": "Asset One",
+                    "description": "Asset description",
+                    "model": "Asset model",
+                    "owner": "Asset owner",
+                    "status": "Running",
+                    "healthLevel": 70,
+                    "image": null,
+                    "createdAt": "2022-01-09T01:12:27.274Z",
+                    "updatedAt": "2022-01-09T01:12:27.274Z",
+                    "imageUrl": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Asset not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/assets/{id}/image": {
+      "patch": {
+        "tags": ["assets"],
+        "summary": "Update asset image",
+        "description": "Update asset image",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Asset ID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "Asset not found"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
                 }
               }
             }
@@ -969,48 +2669,32 @@
                   },
                   "password": {
                     "type": "string"
+                  },
+                  "passwordConfirmation": {
+                    "type": "string"
                   }
                 },
                 "example": {
                   "companyId": "daf480e9-ef0b-4a2c-bfce-849922acc291",
                   "name": "John Doe",
                   "email": "johndoe@gmail.com",
-                  "password": "123456"
-                }
+                  "password": "123456",
+                  "passwordConfirmation": "123456"
+                },
+                "required": [
+                  "companyId",
+                  "name",
+                  "email",
+                  "password",
+                  "passwordConfirmation"
+                ]
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "example": {
-                    "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
-                    "name": "John Doe",
-                    "email": "johndoe@gmail.com",
-                    "createdAt": "2022-01-06T23:37:27.518Z"
-                  }
-                }
-              }
-            }
+          "201": {
+            "description": "Account created successfully"
           },
           "400": {
             "description": "Bad Request",
@@ -1025,6 +2709,24 @@
                   },
                   "example": {
                     "error": "Company does not exist or you are not authorized | User already exists"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
                   }
                 }
               }
@@ -1080,18 +2782,254 @@
                     "email": {
                       "type": "string"
                     },
+                    "avatar": {
+                      "type": "string"
+                    },
                     "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "avatarUrl": {
                       "type": "string"
                     }
                   },
-                  "example": [
-                    {
-                      "id": "749a4edc-4df7-45fc-97cf-4265cac4598d",
-                      "name": "John Doe",
-                      "email": "johndoe@gmail.com",
-                      "createdAt": "2022-01-06T23:37:27.518Z"
+                  "example": {
+                    "id": "1eee6b1c-25dd-475b-bce1-c1d2db3d6c77",
+                    "name": "John Doe",
+                    "email": "johndoe@gmail.com",
+                    "avatar": "9f18c4b8-3c57-4a52-98dc-345992a3e992-file.jpeg",
+                    "createdAt": "2022-01-08T19:04:47.079Z",
+                    "updatedAt": "2022-01-08T19:05:55.268Z",
+                    "avatarUrl": "https://api-challenge-tractian.herokuapp.com/files/9f18c4b8-3c57-4a52-98dc-345992a3e992-file.jpeg"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
                     }
-                  ]
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/linkCompany": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Link user to company",
+        "description": "Link user to company",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "companyId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "companyId": "daf480e9-ef0b-4a2c-bfce-849922acc291"
+                },
+                "required": ["companyId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User linked to company successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found | User already linked to this company"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/unlinkCompany": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Unlink user from company",
+        "description": "Unlink user from company",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "companyId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "companyId": "daf480e9-ef0b-4a2c-bfce-849922acc291"
+                },
+                "required": ["companyId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "User unlinked from company successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found | You can't unlink the last company"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token not provided | Token invalid"
+                  }
                 }
               }
             }

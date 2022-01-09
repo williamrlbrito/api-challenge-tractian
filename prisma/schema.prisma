@@ -53,7 +53,7 @@ model Asset {
   owner       String
   status      String
   healthLevel Int      @map("health_level")
-  photo       String?
+  image       String?
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 

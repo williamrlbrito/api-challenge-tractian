@@ -8,7 +8,7 @@ export class CreateUserController {
 
     const createUserUseCase = new CreateUserUseCase();
 
-    const result = await createUserUseCase.execute({
+    await createUserUseCase.execute({
       userId,
       companyId,
       name,
@@ -16,6 +16,6 @@ export class CreateUserController {
       password,
     });
 
-    return response.json(result);
+    return response.status(201).send();
   }
 }

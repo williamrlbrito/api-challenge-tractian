@@ -41,7 +41,7 @@ export class CreateUserUseCase {
 
     const hashedPassword = await hash(password, 10);
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         name,
         email,
@@ -53,7 +53,5 @@ export class CreateUserUseCase {
         },
       },
     });
-
-    return Object.assign({}, user, { password: undefined });
   }
 }

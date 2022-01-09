@@ -1,3 +1,4 @@
+import { buildUrl } from "../../../../config/upload";
 import { prisma } from "../../../../database/prismaClient";
 
 interface ICreateAsset {
@@ -7,7 +8,7 @@ interface ICreateAsset {
   description: string;
   model: string;
   owner: string;
-  status: string;
+  status: "Running" | "Alerting" | "Stopped";
   healthLevel: number;
 }
 
@@ -69,6 +70,9 @@ export class CreateAssetUseCase {
       },
     });
 
-    return Object.assign({}, asset, { unityId: undefined });
+    return {
+      ...asset,
+      imageUrl: buildUrl(asset.image),
+    };
   }
 }

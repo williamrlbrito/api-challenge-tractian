@@ -42,7 +42,7 @@ CREATE TABLE "assets" (
     "owner" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "health_level" INTEGER NOT NULL,
-    "photo" TEXT,
+    "image" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
